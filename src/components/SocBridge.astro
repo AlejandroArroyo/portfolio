@@ -1,0 +1,53 @@
+---
+import content from '../data/content.json';
+
+const { socBridge } = content;
+---
+
+<section id="soc-bridge" class="w-full py-16 sm:py-20 lg:py-24">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Badge y título -->
+    <div class="mb-10 sm:mb-14">
+      <span class="inline-block font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-accent border border-brand-accent/30 px-3 py-1 rounded-full mb-4">
+        {socBridge.badge}
+      </span>
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-100 mb-3">{socBridge.title}</h2>
+      <p class="text-sm sm:text-base text-neutral-400 max-w-3xl leading-relaxed">{socBridge.description}</p>
+    </div>
+
+    <!-- Tabla de fortalezas -->
+    <div class="border border-brand-border rounded-lg overflow-hidden bg-brand-surface">
+      <!-- Header de columnas -->
+      <div class="hidden sm:grid sm:grid-cols-2 border-b border-brand-border">
+        <div class="px-5 sm:px-6 py-4 font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-incident">
+          TU FORTALEZA REAL (IT / NEGOCIO)
+        </div>
+        <div class="px-5 sm:px-6 py-4 font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-accent border-l border-brand-border">
+          SU APLICACIÓN DIRECTA EN EL SOC
+        </div>
+      </div>
+
+      <!-- Filas -->
+      {socBridge.items.map((item, index) => (
+        <div class={`group grid sm:grid-cols-2 transition-colors hover:bg-neutral-900/30 ${index < socBridge.items.length - 1 ? 'border-b border-brand-border/50' : ''}`}>
+          <!-- Fortaleza -->
+          <div class="px-5 sm:px-6 py-4 sm:py-5">
+            <div class="sm:hidden font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-incident mb-2">FORTALEZA</div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-incident shrink-0"></span>
+              <p class="text-sm font-medium text-neutral-200 leading-relaxed">{item.strength}</p>
+            </div>
+          </div>
+          <!-- Aplicación SOC -->
+          <div class="px-5 sm:px-6 py-4 sm:py-5 sm:border-l sm:border-brand-border/50">
+            <div class="sm:hidden font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-accent mb-2">APLICACIÓN SOC</div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-accent shrink-0"></span>
+              <p class="text-sm text-neutral-400 leading-relaxed">{item.application}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
