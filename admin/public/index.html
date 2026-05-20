@@ -107,6 +107,7 @@
     <button class="nav-item" data-section="metrics">Métricas</button>
     <button class="nav-item" data-section="timeline">Cronología</button>
     <button class="nav-item" data-section="skills">Competencias</button>
+    <button class="nav-item" data-section="socBridge">Ventaja SOC</button>
     <button class="nav-item" data-section="certifications">Certificaciones</button>
     <button class="nav-item" data-section="contact">Contacto</button>
     <button class="nav-item" data-section="footer">Pie de Página</button>
@@ -248,6 +249,29 @@
       </div>
       
       <div id="skills-container"></div>
+    </div>
+
+    <!-- SOC BRIDGE -->
+    <div id="section-socBridge" class="section">
+      <h1 class="section-title">Ventaja Competitiva — Del IT al SOC</h1>
+      <p class="section-desc">Tabla que muestra cómo cada fortaleza del IT se aplica directamente en operaciones SOC.</p>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Insignia</label>
+          <input type="text" data-path="socBridge.badge">
+        </div>
+        <div class="field">
+          <label>Título</label>
+          <input type="text" data-path="socBridge.title">
+        </div>
+      </div>
+      <div class="field">
+        <label>Descripción</label>
+        <textarea data-path="socBridge.description" rows="3"></textarea>
+      </div>
+      
+      <div id="socBridge-container"></div>
     </div>
 
     <!-- CERTIFICATIONS -->
@@ -479,6 +503,7 @@
       renderMetrics();
       renderTimeline();
       renderSkills();
+      renderSocBridge();
       renderCertifications();
     }
 
@@ -503,6 +528,7 @@
       collectMetrics();
       collectTimeline();
       collectSkills();
+      collectSocBridge();
       collectCertifications();
     }
 
@@ -696,6 +722,37 @@
         } else {
           content.skills.columns[i][field] = el.value;
         }
+      });
+    }
+
+    // ===== SOC BRIDGE RENDERER =====
+    function renderSocBridge() {
+      const container = document.getElementById('socBridge-container');
+      container.innerHTML = content.socBridge.items.map((item, i) => `
+        <div class="array-group">
+          <div class="array-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+            <h4>Fila ${i + 1}: ${item.strength.substring(0, 40)}...</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="array-body">
+            <div class="field">
+              <label>Fortaleza IT</label>
+              <input type="text" value="${esc(item.strength)}" data-soc="${i}" data-field="strength">
+            </div>
+            <div class="field">
+              <label>Aplicación SOC</label>
+              <textarea data-soc="${i}" data-field="application" rows="3">${esc(item.application)}</textarea>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function collectSocBridge() {
+      document.querySelectorAll('[data-soc]').forEach(el => {
+        const i = parseInt(el.dataset.soc);
+        const field = el.dataset.field;
+        content.socBridge.items[i][field] = el.value;
       });
     }
 

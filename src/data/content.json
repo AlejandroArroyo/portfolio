@@ -16,6 +16,10 @@
         "href": "#habilidades"
       },
       {
+        "label": "/ventaja-soc",
+        "href": "#soc-bridge"
+      },
+      {
         "label": "/formación",
         "href": "#certificaciones"
       },
@@ -25,8 +29,8 @@
       }
     ],
     "statusLabel": "ESTADO",
-    "statusValue": "NOMINAL",
-    "contactButtonText": "contacto"
+    "statusValue": "disponible",
+    "contactButtonText": "Contacto"
   },
   "hero": {
     "badgeText": "SOC ACTIVO",
@@ -50,19 +54,19 @@
       "label": "EXPERIENCIA IT",
       "value": "8 Años",
       "suffix": "",
-      "description": "Desarrollo, soporte crítico y liderazgo técnico en NTT DATA (everis) para infraestructuras de misión crítica."
+      "description": "Desarrollo, soporte crítico y liderazgo técnico en NTT DATA para infraestructuras de misión crítica."
     },
     {
       "label": "CERTIFICACIONES",
-      "value": "4",
+      "value": "3",
       "suffix": "Creds",
-      "description": "CCNA, CyberOps Associate, Fortinet FCP Analyst y Máster en Ciberseguridad e Inteligencia Artificial."
+      "description": "CCNA, CyberOps Associate, Fortinet FCP Analyst"
     },
     {
       "label": "PROYECTOS CRÍTICOS",
       "value": "2",
       "suffix": "Clientes",
-      "description": "Prosegur (plataforma de gestión, facturación y accesos) y AENA (evaluación técnico-económica de desarrollos)."
+      "description": "Prosegur (plataforma de gestión, integraciones, facturación y accesos) y AENA (evaluación técnico-económica de desarrollos)."
     }
   ],
   "timeline": [
@@ -81,7 +85,7 @@
         },
         {
           "title": "Evaluación técnico-económica:",
-          "text": "Estimación de costes y tiempos para nuevos desarrollos, garantizando viabilidad y eficiencia."
+          "text": "Estimación de costes y tiempos para nuevos desarrollos, garantizando viabilidad y eficiencia para la compañía."
         },
         {
           "title": "Puente negocio-técnica:",
@@ -100,7 +104,7 @@
     },
     {
       "period": "2017 — 2025",
-      "company": "NTT DATA (everis)",
+      "company": "NTT DATA",
       "badge": "PROSEGUR — PLATAFORMA CRÍTICA",
       "badgeColor": "incident",
       "role": "Ingeniero de Soporte, Desarrollador & Líder Técnico",
@@ -129,10 +133,8 @@
         "Oracle PL/SQL",
         "SQL Developer",
         ".NET Framework",
-        "Python (Automatización)",
         "Análisis de Logs",
         "JIRA",
-        "GitHub",
         "IAM / Gestión de Accesos"
       ],
       "footerLabel": "NÚCLEO DE OPERACIONES CRÍTICAS"
@@ -182,7 +184,7 @@
             "description": "Análisis lógico de código backend para aislar fugas de memoria y errores lógicos de negocio."
           },
           {
-            "title": "Automatización (Python)",
+            "title": "Automatización",
             "description": "Scripts de diagnóstico automatizado y recolección de logs para aliviar la carga operativa del equipo."
           }
         ]
@@ -206,7 +208,7 @@
           {
             "title": "Gestión de Incidentes y Accesos",
             "description": "Resolución de alertas de prioridad alta, control de accesos, permisos y auditoría de seguridad."
-        }
+          }
         ]
       }
     ]
