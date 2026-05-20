@@ -1,0 +1,52 @@
+---
+import content from '../data/content.json';
+
+const { hero } = content;
+---
+
+<section id="sobre-mi" class="relative py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-neutral-900">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Etiqueta superior -->
+    <div class="flex flex-wrap items-center gap-2 mb-6">
+      <span class="text-xs font-mono text-brand-accent font-bold uppercase tracking-widest">[ {hero.badgeText} ]</span>
+      <span class="w-8 h-[1px] bg-neutral-800"></span>
+      <span class="text-xs font-mono text-neutral-500 uppercase tracking-wider">{hero.badgeSubtitle}</span>
+    </div>
+
+    <!-- Titular principal -->
+    <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold text-neutral-100 tracking-tight leading-[1.05] max-w-[1100px] mb-8" set:html={hero.title}></h1>
+
+    <!-- Cuerpo narrativo -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-start">
+      <div class="lg:col-span-8 text-neutral-400 text-base sm:text-lg leading-relaxed space-y-6">
+        <p>{hero.description1}</p>
+        <p>{hero.description2}</p>
+      </div>
+      
+      <!-- Panel lateral: Valores clave -->
+      <div class="lg:col-span-4 bg-brand-surface border border-neutral-800 p-5 sm:p-6 rounded relative overflow-hidden group">
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xs font-mono text-brand-accent uppercase tracking-widest mb-1">// {hero.valuesTitle}</h3>
+            <p class="text-xs text-neutral-400">{hero.valuesDescription}</p>
+          </div>
+          
+          <ul class="space-y-3 font-mono text-xs text-neutral-300">
+            {hero.values.map((val, i) => (
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent">0{i + 1}.</span>
+                <span>{val}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-500">
+            <span>{hero.slaLabel}</span>
+            <span>{hero.slaValue}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+import content from '../data/content.json';
+
+const { header } = content;
+---
+
+<header class="sticky top-0 z-50 w-full bg-brand-dark/80 backdrop-blur-md border-b border-neutral-900/80 transition-all duration-300">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+    <!-- Logo/Iniciales -->
+    <a href="#top" class="group flex items-center gap-3 focus:outline-none shrink-0">
+      <div class="w-7 h-7 bg-neutral-900 border border-neutral-800 rounded flex items-center justify-center group-hover:border-brand-accent transition-colors">
+        <span class="text-xs font-mono font-bold text-brand-accent group-hover:text-brand-accent/90 transition-colors">&gt;_</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs font-mono font-semibold tracking-wider text-neutral-200">{header.brand}</span>
+        <span class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest leading-none hidden sm:block">{header.brandSubtitle}</span>
+      </div>
+    </a>
+
+    <!-- Navegación -->
+    <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs font-mono tracking-widest uppercase">
+      {header.navLinks.map((link) => (
+        <a href={link.href} class="text-neutral-400 hover:text-neutral-100 transition-colors py-1 focus:outline-none">{link.label}</a>
+      ))}
+    </nav>
+
+    <!-- Indicador de Estado -->
+    <div class="flex items-center gap-3">
+      <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-brand-surface border border-neutral-800 rounded-full">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+        </span>
+        <span class="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-wider">
+          {header.statusLabel}: <span class="text-brand-accent">{header.statusValue}</span>
+        </span>
+      </div>
+      
+      <a 
+        href="#contacto" 
+        class="text-xs font-mono border border-neutral-800 px-3 py-1.5 rounded bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-all focus:outline-none text-neutral-300 shrink-0"
+      >
+        {header.contactButtonText}
+      </a>
+    </div>
+  </div>
+</header>

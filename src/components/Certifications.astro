@@ -1,0 +1,75 @@
+---
+import content from '../data/content.json';
+
+const { certifications } = content;
+
+const statusColorMap = {
+  accent: 'text-brand-accent',
+  incident: 'text-brand-incident',
+  neutral: 'text-neutral-400'
+};
+
+const hoverBorderMap = {
+  accent: 'hover:border-brand-accent/40',
+  incident: 'hover:border-brand-incident/40',
+  neutral: 'hover:border-brand-accent/40'
+};
+
+const iconColorMap = {
+  accent: 'text-brand-accent',
+  incident: 'text-brand-incident',
+  neutral: 'text-brand-accent'
+};
+
+const certIcons = [
+  '<path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />',
+  '<path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-3.536 4.978 4.978 0 011.414-3.536m0 0L11.314 11.31M8.464 18.364a9 9 0 01-6.364-6.364 9 9 0 016.364-6.364m0 0l2.829 2.829" />',
+  '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.071 19.071a9 9 0 11-12.728 0m12.728 0l2.829 2.829m-2.829-2.829L15 15" />',
+  '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />'
+];
+---
+
+<section id="certificaciones" class="py-16 sm:py-20 lg:py-28 bg-neutral-950 border-b border-neutral-900">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabecera de sección -->
+    <div class="mb-10 sm:mb-14 lg:mb-20">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono text-brand-accent font-bold uppercase tracking-widest">[ {certifications.badge} ]</span>
+        <span class="w-8 h-[1px] bg-neutral-800"></span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-100 tracking-tight leading-none">
+        {certifications.title}
+      </h2>
+      <p class="text-neutral-400 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base leading-relaxed">
+        {certifications.description}
+      </p>
+    </div>
+
+    <!-- Grid de certificaciones -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+      {certifications.items.map((cert, i) => (
+        <div class={`bg-brand-surface border border-neutral-800 p-5 sm:p-6 rounded flex flex-col justify-between ${hoverBorderMap[cert.statusColor] || 'hover:border-brand-accent/40'} hover:-translate-y-1 transition-all duration-300 group`}>
+          <div>
+            <div class={`w-10 h-10 rounded bg-neutral-950 border border-neutral-800 flex items-center justify-center mb-6 group-hover:${iconColorMap[cert.statusColor] || 'text-brand-accent'}/30 transition-colors`}>
+              <svg xmlns="http://www.w3.org/2000/svg" class={`w-5 h-5 ${iconColorMap[cert.statusColor] || 'text-brand-accent'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" set:html={certIcons[i]}></svg>
+            </div>
+            
+            <span class={`text-[9px] font-mono ${iconColorMap[cert.statusColor] || 'text-brand-accent'} tracking-widest uppercase block mb-1`}>{cert.label}</span>
+            <h3 class="text-sm sm:text-base font-bold text-neutral-100 tracking-tight leading-snug">
+              {cert.title}
+            </h3>
+            <p class="text-xs text-neutral-400 mt-2 font-mono">{cert.institution}</p>
+          </div>
+          
+          <div class="mt-6 pt-4 border-t border-neutral-900 flex items-center justify-between text-[10px] font-mono text-neutral-500">
+            <span>{cert.footerLabel}</span>
+            <span class={`${statusColorMap[cert.statusColor] || 'text-brand-accent'} font-semibold`}>{cert.status}</span>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</section>

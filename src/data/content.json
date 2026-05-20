@@ -1,0 +1,313 @@
+{
+  "header": {
+    "brand": "ALEJANDRO ARROYO GIL",
+    "brandSubtitle": "Cybersecurity Analyst | SOC | Former Team Leader at NTT DATA",
+    "navLinks": [
+      {
+        "label": "/perfil",
+        "href": "#sobre-mi"
+      },
+      {
+        "label": "/trayectoria",
+        "href": "#experiencia"
+      },
+      {
+        "label": "/competencias",
+        "href": "#habilidades"
+      },
+      {
+        "label": "/formación",
+        "href": "#certificaciones"
+      },
+      {
+        "label": "/contacto",
+        "href": "#contacto"
+      }
+    ],
+    "statusLabel": "ESTADO",
+    "statusValue": "NOMINAL",
+    "contactButtonText": "contacto"
+  },
+  "hero": {
+    "badgeText": "SEGURIDAD ACTIVA",
+    "badgeSubtitle": "Especialista en Operaciones Críticas",
+    "title": "Sistemas caídos significan pérdidas millonarias. Yo aseguro la <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-neutral-100 to-neutral-400\">continuidad de negocio</span>.",
+    "description1": "Me especializo en la resiliencia de sistemas de alta disponibilidad, la gestión de operaciones críticas y la resolución de incidentes complejos bajo extrema presión. Con más de 8 años de trayectoria dentro de NTT DATA para infraestructuras nacionales de misión crítica como Aena y Prosegur, he liderado la defensa y estabilidad operativa de entornos transaccionales masivos.",
+    "description2": "Mi valor no reside únicamente en diagnosticar un bloqueo en base de datos a las tres de la mañana o analizar la causa raíz de una vulnerabilidad de red. Reside en mi capacidad para traducir el impacto técnico al lenguaje del negocio, alinear las operaciones con los SLAs corporativos y coordinar equipos multidisciplinares hacia una mitigación rápida y definitiva.",
+    "valuesTitle": "VALORES CLAVE",
+    "valuesDescription": "Principios innegociables en producción",
+    "values": [
+      "Mitigación ágil de incidencias",
+      "Análisis forense de causa raíz",
+      "Gobernanza de seguridad y cumplimiento",
+      "Traducción técnica y de negocio"
+    ],
+    "slaLabel": "LÍMITES SLA",
+    "slaValue": "GARANTÍA 99,99%"
+  },
+  "metrics": [
+    {
+      "label": "CUMPLIMIENTO SLA",
+      "value": "99,99%",
+      "suffix": "SLA",
+      "description": "Garantía de disponibilidad y cumplimiento en sistemas de misión crítica para clientes con flujos masivos de transacciones."
+    },
+    {
+      "label": "ESCALA DE SISTEMAS",
+      "value": "8 Años",
+      "suffix": "",
+      "description": "Evolución y solidez dentro de la multinacional NTT DATA, gestionando infraestructuras nacionales y de gran escala."
+    },
+    {
+      "label": "MÉTRICA DE MITIGACIÓN",
+      "value": "< 15m",
+      "suffix": "MTTR",
+      "description": "Tiempo promedio estimado de triaje, mitigación de impacto y aislamiento de fallos críticos en entornos de alta disponibilidad."
+    }
+  ],
+  "timeline": [
+    {
+      "period": "2023 — 2025",
+      "company": "NTT DATA",
+      "badge": "OPERACIONES CRÍTICAS / AENA Y PROSEGUR",
+      "badgeColor": "accent",
+      "role": "Responsable de Equipo (Operaciones Críticas)",
+      "roleDescription": "Coordinación de respuesta ante incidentes y garantía de resiliencia de sistemas.",
+      "description": "Lideré el equipo responsable de la estabilidad operativa de los sistemas de misión crítica. Coordiné la respuesta rápida ante incidentes de alta prioridad, asegurando la mitigación y alineando los SLAs técnicos con los objetivos comerciales de clientes de gran envergadura.",
+      "achievements": [
+        {
+          "title": "Mitigación de incidentes:",
+          "text": "Triaje, análisis de impacto de negocio y mitigación en producción."
+        },
+        {
+          "title": "Planificación táctica:",
+          "text": "Gestión estratégica de riesgos operativos y control de calidad estricto de entregas."
+        },
+        {
+          "title": "Cumplimiento de seguridad:",
+          "text": "Requisitos de seguridad y normativa en el ciclo de vida del software."
+        }
+      ],
+      "stackLabel": "STACK OPERATIVO",
+      "stack": [
+        "JIRA Gestión de Incidencias",
+        "MS Project",
+        "Arquitectura .NET",
+        "Gobernanza SLA",
+        "Gestión de Crisis"
+      ],
+      "footerLabel": "NÚCLEO DE LIDERAZGO"
+    },
+    {
+      "period": "2020 — 2023",
+      "company": "NTT DATA",
+      "badge": "ANÁLISIS Y DIAGNÓSTICO AVANZADO",
+      "badgeColor": "incident",
+      "role": "Analista Senior (Diagnóstico Avanzado)",
+      "roleDescription": "Resolución de incidentes complejos en aplicaciones empresariales de alto nivel.",
+      "description": "Me consolidé como especialista técnico de referencia para incidentes altamente complejos. Lideré el diagnóstico profundo mediante lectura cruzada de volcados de memoria, registros de sistema y consultas complejas de base de datos para proponer parches inmediatos de seguridad y rendimiento.",
+      "achievements": [
+        {
+          "title": "Análisis forense de datos:",
+          "text": "Diagnóstico avanzado mediante consultas complejas en Oracle PL/SQL y SQL Developer."
+        },
+        {
+          "title": "Mentoría técnica:",
+          "text": "Capacité y guié al equipo de soporte en metodologías avanzadas de resolución de fallos y depuración bajo presión."
+        },
+        {
+          "title": "Análisis de vulnerabilidades:",
+          "text": "Colaboración activa con responsables para identificar fallos lógicos y validar la seguridad de los despliegues en alta disponibilidad."
+        }
+      ],
+      "stackLabel": "STACK TÉCNICO",
+      "stack": [
+        "Oracle PL/SQL",
+        "SQL Developer",
+        ".NET Framework",
+        "Análisis de Logs",
+        "JIRA",
+        "GitHub"
+      ],
+      "footerLabel": "NÚCLEO DE DIAGNÓSTICO"
+    },
+    {
+      "period": "2017 — 2020",
+      "company": "NTT DATA",
+      "badge": "SOPORTE Y AUTOMATIZACIÓN",
+      "badgeColor": "muted",
+      "role": "Analista Junior (Soporte Técnico y Automatización)",
+      "roleDescription": "Monitoreo y triaje de incidentes en entornos críticos de misión crítica.",
+      "description": "Inicié mi carrera en el núcleo operativo de soporte para grandes cuentas. Me enfoqué en garantizar la disponibilidad continua del servicio, asumiendo tareas de depuración profunda y buscando proactivamente la automatización de procesos para aliviar la carga operativa del equipo.",
+      "achievements": [
+        {
+          "title": "Automatización inteligente:",
+          "text": "Desarrollé scripts en Python para automatizar el diagnóstico y la recolección de registros ante fallos recurrentes."
+        },
+        {
+          "title": "Monitoreo de misión crítica:",
+          "text": "Triaje ágil de alarmas y depuración profunda para identificar la causa raíz de errores lógicos."
+        },
+        {
+          "title": "Garantía de entrega:",
+          "text": "Responsable de la documentación técnica rigurosa y la validación post-implantación en producción."
+        }
+      ],
+      "stackLabel": "STACK TÉCNICO",
+      "stack": [
+        "Python",
+        "Oracle PL/SQL",
+        "SQL Developer",
+        ".NET Framework",
+        "Visual Studio"
+      ],
+      "footerLabel": "NÚCLEO DE AUTOMATIZACIÓN"
+    }
+  ],
+  "skills": {
+    "badge": "COMPETENCIAS TÉCNICAS",
+    "title": "Competencias de Resiliencia",
+    "description": "Mi perfil técnico se equilibra estratégicamente en tres frentes: gestión y operaciones bajo presión, diagnóstico técnico profundo y protección lógica de activos de información.",
+    "columns": [
+      {
+        "title": "Gobernanza y Operaciones",
+        "subtitle": "GESTIÓN DE CRISIS Y SLA",
+        "items": [
+          {
+            "title": "Gestión de Incidencias (JIRA Ops)",
+            "description": "Coordinación y triaje estructurado ante alertas y caídas de servicio de nivel P1/P2."
+          },
+          {
+            "title": "Alineación de SLAs Corporativos",
+            "description": "Traducción de métricas técnicas en requerimientos y metas de estabilidad del negocio."
+          },
+          {
+            "title": "Gestión de Riesgos (MS Project)",
+            "description": "Planificación táctica y control predictivo de contingencias operativas en producción."
+          },
+          {
+            "title": "Traducción Técnica-Comercial",
+            "description": "Intermediación clave entre equipos técnicos e interlocutores de negocio (Aena, Prosegur)."
+          }
+        ]
+      },
+      {
+        "title": "Diagnóstico Avanzado",
+        "subtitle": "DIAGNÓSTICO FORENSE Y BBDD",
+        "items": [
+          {
+            "title": "Oracle PL/SQL y SQL Developer",
+            "description": "Optimización de consultas complejas, depuración de procedimientos almacenados y bloqueos de base de datos."
+          },
+          {
+            "title": "Análisis Forense de Registros",
+            "description": "Revisión profunda de trazas de error, volcados de hilos y consumos anómalos de CPU y memoria."
+          },
+          {
+            "title": "Entornos .NET Framework y Core",
+            "description": "Análisis lógico de código fuente backend para aislar fugas de memoria y errores lógicos de negocio."
+          },
+          {
+            "title": "Automatización (Python)",
+            "description": "Construcción de scripts ligeros de monitoreo activo y recolección automatizada de logs diagnósticos."
+          }
+        ]
+      },
+      {
+        "title": "Ciberseguridad y Redes",
+        "subtitle": "CUMPLIMIENTO Y PROTOCOLOS",
+        "items": [
+          {
+            "title": "Cisco CCNA y CyberOps",
+            "description": "Entendimiento robusto de routing y switching, análisis de tráfico y respuesta estructurada ante incidentes."
+          },
+          {
+            "title": "Fortinet FCP Analyst",
+            "description": "Gobernanza de firewalls corporativos y análisis avanzado de amenazas de red distribuida."
+          },
+          {
+            "title": "Ciclo de Vida Seguro (SDLC)",
+            "description": "Supervisión e incorporación de controles de seguridad en despliegues críticos."
+          },
+          {
+            "title": "Cumplimiento y Auditoría",
+            "description": "Garantía de cumplimiento normativo (RGPD, PCI-DSS) en el manejo y almacenamiento de registros críticos."
+          }
+        ]
+      }
+    ]
+  },
+  "certifications": {
+    "badge": "CREDENCIALES DE SEGURIDAD",
+    "title": "Certificaciones y Formación Especializada",
+    "description": "Formación que combina un posgrado especializado con certificaciones internacionales líderes en redes, ciberdefensa y análisis de seguridad.",
+    "items": [
+      {
+        "label": "MÁSTER UNIVERSITARIO",
+        "title": "Ciberseguridad e Inteligencia Artificial",
+        "institution": "Tajamar Centro Universitario",
+        "footerLabel": "ESPECIALIZACIÓN ACADÉMICA",
+        "status": "COMPLETADO",
+        "statusColor": "neutral"
+      },
+      {
+        "label": "CERTIFICACIÓN CISCO",
+        "title": "Cisco Certified Network Associate (CCNA)",
+        "institution": "Infraestructura de Routing y Switching",
+        "footerLabel": "REF. OPERACIONES DE RED",
+        "status": "ACTIVA",
+        "statusColor": "incident"
+      },
+      {
+        "label": "OPERACIONES DE SEGURIDAD CISCO",
+        "title": "Cisco Certified CyberOps Associate",
+        "institution": "Respuesta ante Incidentes y Defensa Activa",
+        "footerLabel": "ANALISTA DE SEGURIDAD",
+        "status": "ACTIVA",
+        "statusColor": "incident"
+      },
+      {
+        "label": "CARRERA DE SEGURIDAD FORTINET",
+        "title": "Fortinet Certified Professional (FCP - Analyst)",
+        "institution": "Firewall Empresarial y Análisis de Registros",
+        "footerLabel": "CREDENCIAL DE ANALISTA",
+        "status": "ACTIVA",
+        "statusColor": "accent"
+      }
+    ]
+  },
+  "contact": {
+    "badge": "PROTOCOLO DE CONEXIÓN SEGURA / PUERTO: 443",
+    "title": "Inicie un Canal de Contacto",
+    "description": "¿Tiene incidencias recurrentes en sus entornos de producción, necesita robustecer sus SLAs o busca integrar liderazgo técnico con visión de negocio en su equipo? Conectemos.",
+    "terminalTitle": "CONSOLA_SEGURA@NTT_DATA",
+    "connectMessage": "# ESTABLECIENDO CONEXIÓN CON EL SERVIDOR...",
+    "connectResponse": "> INTENTO DE CONEXIÓN: CORRECTO [TLS_AES_256_GCM_SHA384]",
+    "channelsTitle": "// CANALES DE CONTACTO:",
+    "email": {
+      "label": "CORREO ELECTRÓNICO:",
+      "value": "alejandroarroyogil@gmail.com"
+    },
+    "linkedin": {
+      "label": "LINKEDIN:",
+      "value": "linkedin.com/in/alejandroarroyogil",
+      "url": "https://www.linkedin.com/in/alejandroarroyogil/"
+    },
+    "location": {
+      "label": "UBICACIÓN / DISPONIBILIDAD:",
+      "value": "Madrid, España — Cobertura Remota e Híbrida"
+    },
+    "sessionId": "ID_DE_SESIÓN: 9c08a4-0a88bd",
+    "copyButton": "[ COPIAR CORREO ]",
+    "contactButton": "[ INICIAR CONTACTO ]"
+  },
+  "footer": {
+    "brand": "PORTFOLIO DE OPERACIONES NTT DATA",
+    "copyright": "© 2026. Diseñado con rigor técnico, sin código innecesario y máxima accesibilidad semántica.",
+    "tech": [
+      "ASTRO v4.15",
+      "TAILWIND CSS",
+      "SESIÓN SEGURA"
+    ]
+  }
+}

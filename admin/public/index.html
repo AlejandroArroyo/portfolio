@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración — Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a0b;
+      --surface: #111113;
+      --surface2: #1a1a1e;
+      --border: #27272a;
+      --text: #e4e4e7;
+      --text-muted: #71717a;
+      --accent: #10b981;
+      --accent-dim: #10b98120;
+      --incident: #06b6d4;
+      --incident-dim: #06b6d420;
+      --danger: #ef4444;
+      --radius: 6px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    
+    /* Sidebar */
+    .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 20px 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 10; }
+    .sidebar-header { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+    .sidebar-header h2 { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+    .sidebar-header p { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    .nav-item { display: block; width: 100%; text-align: left; padding: 10px 20px; font-size: 13px; color: var(--text-muted); background: none; border: none; cursor: pointer; transition: all 0.15s; border-left: 3px solid transparent; }
+    .nav-item:hover { color: var(--text); background: var(--surface2); }
+    .nav-item.active { color: var(--accent); background: var(--accent-dim); border-left-color: var(--accent); font-weight: 600; }
+    
+    /* Main */
+    .main { margin-left: 240px; flex: 1; padding: 32px 40px; max-width: 900px; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .section-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .section-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+    
+    /* Form elements */
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .field input[type="text"], .field textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; color: var(--text); font-size: 14px; font-family: inherit; transition: border-color 0.15s; }
+    .field input[type="text"]:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+    .field textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+    .field .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    
+    /* Array items */
+    .array-group { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
+    .array-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--surface2); cursor: pointer; user-select: none; }
+    .array-header h4 { font-size: 13px; font-weight: 600; }
+    .array-header .toggle-icon { font-size: 12px; color: var(--text-muted); transition: transform 0.2s; }
+    .array-header.open .toggle-icon { transform: rotate(180deg); }
+    .array-body { padding: 14px; display: none; }
+    .array-body.open { display: block; }
+    
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 600; border-radius: var(--radius); border: none; cursor: pointer; transition: all 0.15s; }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    .btn-accent { background: var(--accent); color: #000; }
+    .btn-accent:hover { background: #059669; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-outline:hover { border-color: var(--text-muted); color: var(--text); }
+    .btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+    
+    .actions-bar { position: fixed; bottom: 0; left: 240px; right: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; z-index: 20; }
+    .actions-bar .status { font-size: 12px; color: var(--text-muted); }
+    .actions-bar .buttons { display: flex; gap: 10px; }
+    
+    /* Toast */
+    .toast { position: fixed; top: 20px; right: 20px; padding: 12px 20px; border-radius: var(--radius); font-size: 13px; font-weight: 600; z-index: 100; transform: translateX(120%); transition: transform 0.3s ease; }
+    .toast.show { transform: translateX(0); }
+    .toast.success { background: var(--accent); color: #000; }
+    .toast.error { background: var(--danger); color: #fff; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+      .main { margin-left: 0; padding: 20px; }
+      .actions-bar { left: 0; padding: 14px 20px; }
+    }
+    
+    .inline-row { display: flex; gap: 12px; }
+    .inline-row .field { flex: 1; }
+    
+    .tag-input-container { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); min-height: 42px; align-items: center; }
+    .tag-input-container .tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+    .tag-input-container .tag button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 14px; line-height: 1; padding: 0 2px; }
+    .tag-input-container .tag button:hover { color: var(--danger); }
+    .tag-input-container input { border: none; background: transparent; color: var(--text); font-size: 13px; outline: none; flex: 1; min-width: 100px; padding: 2px; }
+    
+    select { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; color: var(--text); font-size: 14px; width: 100%; cursor: pointer; }
+    select:focus { outline: none; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Portfolio CMS</h2>
+      <p>Editor de contenido</p>
+    </div>
+    <button class="nav-item active" data-section="header">Cabecera</button>
+    <button class="nav-item" data-section="hero">Hero Principal</button>
+    <button class="nav-item" data-section="metrics">Métricas</button>
+    <button class="nav-item" data-section="timeline">Cronología</button>
+    <button class="nav-item" data-section="skills">Competencias</button>
+    <button class="nav-item" data-section="certifications">Certificaciones</button>
+    <button class="nav-item" data-section="contact">Contacto</button>
+    <button class="nav-item" data-section="footer">Pie de Página</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main" style="padding-bottom: 80px;">
+    
+    <!-- HEADER -->
+    <div id="section-header" class="section active">
+      <h1 class="section-title">Cabecera</h1>
+      <p class="section-desc">Configuración de la barra de navegación superior.</p>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Marca / Nombre</label>
+          <input type="text" data-path="header.brand">
+        </div>
+        <div class="field">
+          <label>Subtítulo</label>
+          <input type="text" data-path="header.brandSubtitle">
+        </div>
+      </div>
+      <div class="inline-row">
+        <div class="field">
+          <label>Etiqueta de Estado</label>
+          <input type="text" data-path="header.statusLabel">
+        </div>
+        <div class="field">
+          <label>Valor de Estado</label>
+          <input type="text" data-path="header.statusValue">
+        </div>
+      </div>
+      <div class="field">
+        <label>Texto botón de contacto</label>
+        <input type="text" data-path="header.contactButtonText">
+      </div>
+      
+      <div class="field">
+        <label>Enlaces de navegación</label>
+        <p class="hint">Formato: etiqueta|destino, uno por línea</p>
+        <textarea data-path="header.navLinks" data-type="nav-links" rows="6"></textarea>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div id="section-hero" class="section">
+      <h1 class="section-title">Hero Principal</h1>
+      <p class="section-desc">Sección principal con la propuesta de valor.</p>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Texto de insignia</label>
+          <input type="text" data-path="hero.badgeText">
+        </div>
+        <div class="field">
+          <label>Subtítulo de insignia</label>
+          <input type="text" data-path="hero.badgeSubtitle">
+        </div>
+      </div>
+      
+      <div class="field">
+        <label>Título principal</label>
+        <p class="hint">Puedes usar HTML para resaltar partes del texto</p>
+        <textarea data-path="hero.title" rows="3"></textarea>
+      </div>
+      
+      <div class="field">
+        <label>Primer párrafo</label>
+        <textarea data-path="hero.description1" rows="4"></textarea>
+      </div>
+      
+      <div class="field">
+        <label>Segundo párrafo</label>
+        <textarea data-path="hero.description2" rows="4"></textarea>
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Título de valores</label>
+          <input type="text" data-path="hero.valuesTitle">
+        </div>
+        <div class="field">
+          <label>Descripción de valores</label>
+          <input type="text" data-path="hero.valuesDescription">
+        </div>
+      </div>
+      
+      <div class="field">
+        <label>Lista de valores</label>
+        <p class="hint">Uno por línea</p>
+        <textarea data-path="hero.values" data-type="array" rows="5"></textarea>
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Etiqueta SLA</label>
+          <input type="text" data-path="hero.slaLabel">
+        </div>
+        <div class="field">
+          <label>Valor SLA</label>
+          <input type="text" data-path="hero.slaValue">
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div id="section-metrics" class="section">
+      <h1 class="section-title">Métricas</h1>
+      <p class="section-desc">Panel de métricas clave de impacto corporativo.</p>
+      <div id="metrics-container"></div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div id="section-timeline" class="section">
+      <h1 class="section-title">Cronología Profesional</h1>
+      <p class="section-desc">Evolución de roles y responsabilidades en NTT DATA.</p>
+      <div id="timeline-container"></div>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="section-skills" class="section">
+      <h1 class="section-title">Competencias Técnicas</h1>
+      <p class="section-desc">Tres columnas de habilidades categorizadas.</p>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Insignia</label>
+          <input type="text" data-path="skills.badge">
+        </div>
+        <div class="field">
+          <label>Título</label>
+          <input type="text" data-path="skills.title">
+        </div>
+      </div>
+      <div class="field">
+        <label>Descripción</label>
+        <textarea data-path="skills.description" rows="3"></textarea>
+      </div>
+      
+      <div id="skills-container"></div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div id="section-certifications" class="section">
+      <h1 class="section-title">Certificaciones</h1>
+      <p class="section-desc">Credenciales de seguridad y formación especializada.</p>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Insignia</label>
+          <input type="text" data-path="certifications.badge">
+        </div>
+        <div class="field">
+          <label>Título</label>
+          <input type="text" data-path="certifications.title">
+        </div>
+      </div>
+      <div class="field">
+        <label>Descripción</label>
+        <textarea data-path="certifications.description" rows="2"></textarea>
+      </div>
+      
+      <div id="certifications-container"></div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="section-contact" class="section">
+      <h1 class="section-title">Contacto</h1>
+      <p class="section-desc">Sección de contacto con estética de terminal.</p>
+      
+      <div class="field">
+        <label>Insignia superior</label>
+        <input type="text" data-path="contact.badge">
+      </div>
+      <div class="field">
+        <label>Título</label>
+        <input type="text" data-path="contact.title">
+      </div>
+      <div class="field">
+        <label>Descripción</label>
+        <textarea data-path="contact.description" rows="3"></textarea>
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Título de terminal</label>
+          <input type="text" data-path="contact.terminalTitle">
+        </div>
+        <div class="field">
+          <label>ID de sesión</label>
+          <input type="text" data-path="contact.sessionId">
+        </div>
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Mensaje de conexión</label>
+          <input type="text" data-path="contact.connectMessage">
+        </div>
+        <div class="field">
+          <label>Respuesta de conexión</label>
+          <input type="text" data-path="contact.connectResponse">
+        </div>
+      </div>
+      
+      <div class="field">
+        <label>Título de canales</label>
+        <input type="text" data-path="contact.channelsTitle">
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Etiqueta email</label>
+          <input type="text" data-path="contact.email.label">
+        </div>
+        <div class="field">
+          <label>Valor email</label>
+          <input type="text" data-path="contact.email.value">
+        </div>
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Etiqueta LinkedIn</label>
+          <input type="text" data-path="contact.linkedin.label">
+        </div>
+        <div class="field">
+          <label>Valor LinkedIn</label>
+          <input type="text" data-path="contact.linkedin.value">
+        </div>
+      </div>
+      <div class="field">
+        <label>URL LinkedIn</label>
+        <input type="text" data-path="contact.linkedin.url">
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Etiqueta ubicación</label>
+          <input type="text" data-path="contact.location.label">
+        </div>
+        <div class="field">
+          <label>Valor ubicación</label>
+          <input type="text" data-path="contact.location.value">
+        </div>
+      </div>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Texto botón copiar</label>
+          <input type="text" data-path="contact.copyButton">
+        </div>
+        <div class="field">
+          <label>Texto botón contactar</label>
+          <input type="text" data-path="contact.contactButton">
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="section-footer" class="section">
+      <h1 class="section-title">Pie de Página</h1>
+      <p class="section-desc">Información del pie de página.</p>
+      
+      <div class="field">
+        <label>Marca</label>
+        <input type="text" data-path="footer.brand">
+      </div>
+      <div class="field">
+        <label>Copyright</label>
+        <input type="text" data-path="footer.copyright">
+      </div>
+      <div class="field">
+        <label>Tecnologías</label>
+        <p class="hint">Una por línea</p>
+        <textarea data-path="footer.tech" data-type="array" rows="4"></textarea>
+      </div>
+    </div>
+  </main>
+
+  <!-- Actions Bar -->
+  <div class="actions-bar">
+    <span class="status" id="save-status">Sin cambios</span>
+    <div class="buttons">
+      <button class="btn btn-outline" onclick="loadContent()">Recargar</button>
+      <button class="btn btn-accent" onclick="saveContent()">Guardar Cambios</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let content = {};
+    let originalContent = '';
+
+    // Navigation
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('section-' + btn.dataset.section).classList.add('active');
+      });
+    });
+
+    // Toast
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast ' + type + ' show';
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Load content from server
+    async function loadContent() {
+      try {
+        const res = await fetch('/api/content');
+        content = await res.json();
+        originalContent = JSON.stringify(content, null, 2);
+        populateForm();
+        document.getElementById('save-status').textContent = 'Datos cargados';
+      } catch (err) {
+        showToast('Error al cargar datos', 'error');
+      }
+    }
+
+    // Save content to server
+    async function saveContent() {
+      collectForm();
+      try {
+        const res = await fetch('/api/content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(content, null, 2)
+        });
+        const result = await res.json();
+        if (result.success) {
+          originalContent = JSON.stringify(content, null, 2);
+          document.getElementById('save-status').textContent = 'Guardado correctamente';
+          showToast('Contenido guardado correctamente');
+        } else {
+          showToast('Error: ' + result.error, 'error');
+        }
+      } catch (err) {
+        showToast('Error de conexión', 'error');
+      }
+    }
+
+    // Populate form fields from content
+    function populateForm() {
+      // Simple fields
+      document.querySelectorAll('[data-path]').forEach(el => {
+        const path = el.dataset.path;
+        const type = el.dataset.type;
+        const value = getByPath(content, path);
+        if (value === undefined) return;
+        
+        if (type === 'array' && Array.isArray(value)) {
+          el.value = value.join('\n');
+        } else if (type === 'nav-links' && Array.isArray(value)) {
+          el.value = value.map(l => l.label + '|' + l.href).join('\n');
+        } else if (typeof value === 'string') {
+          el.value = value;
+        }
+      });
+
+      // Complex sections
+      renderMetrics();
+      renderTimeline();
+      renderSkills();
+      renderCertifications();
+    }
+
+    // Collect form data back into content object
+    function collectForm() {
+      document.querySelectorAll('[data-path]').forEach(el => {
+        const path = el.dataset.path;
+        const type = el.dataset.type;
+        
+        if (type === 'array') {
+          setByPath(content, path, el.value.split('\n').filter(v => v.trim()));
+        } else if (type === 'nav-links') {
+          setByPath(content, path, el.value.split('\n').filter(v => v.trim()).map(line => {
+            const parts = line.split('|');
+            return { label: parts[0]?.trim() || '', href: parts[1]?.trim() || '' };
+          }));
+        } else {
+          setByPath(content, path, el.value);
+        }
+      });
+
+      collectMetrics();
+      collectTimeline();
+      collectSkills();
+      collectCertifications();
+    }
+
+    // Helper: get nested value
+    function getByPath(obj, path) {
+      return path.split('.').reduce((o, k) => o?.[k], obj);
+    }
+
+    // Helper: set nested value
+    function setByPath(obj, path, value) {
+      const parts = path.split('.');
+      let current = obj;
+      for (let i = 0; i < parts.length - 1; i++) {
+        current = current[parts[i]];
+      }
+      current[parts[parts.length - 1]] = value;
+    }
+
+    // ===== METRICS RENDERER =====
+    function renderMetrics() {
+      const container = document.getElementById('metrics-container');
+      container.innerHTML = content.metrics.map((m, i) => `
+        <div class="array-group">
+          <div class="array-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+            <h4>Métrica ${i + 1}: ${m.label}</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="array-body">
+            <div class="inline-row">
+              <div class="field">
+                <label>Etiqueta</label>
+                <input type="text" value="${esc(m.label)}" data-metric="${i}" data-field="label">
+              </div>
+              <div class="field">
+                <label>Valor</label>
+                <input type="text" value="${esc(m.value)}" data-metric="${i}" data-field="value">
+              </div>
+            </div>
+            <div class="inline-row">
+              <div class="field">
+                <label>Sufijo</label>
+                <input type="text" value="${esc(m.suffix)}" data-metric="${i}" data-field="suffix">
+              </div>
+            </div>
+            <div class="field">
+              <label>Descripción</label>
+              <textarea data-metric="${i}" data-field="description" rows="2">${esc(m.description)}</textarea>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function collectMetrics() {
+      document.querySelectorAll('[data-metric]').forEach(el => {
+        const i = parseInt(el.dataset.metric);
+        const field = el.dataset.field;
+        content.metrics[i][field] = el.value;
+      });
+    }
+
+    // ===== TIMELINE RENDERER =====
+    function renderTimeline() {
+      const container = document.getElementById('timeline-container');
+      container.innerHTML = content.timeline.map((item, i) => `
+        <div class="array-group">
+          <div class="array-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+            <h4>${item.period} — ${item.role}</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="array-body">
+            <div class="inline-row">
+              <div class="field">
+                <label>Periodo</label>
+                <input type="text" value="${esc(item.period)}" data-timeline="${i}" data-field="period">
+              </div>
+              <div class="field">
+                <label>Empresa</label>
+                <input type="text" value="${esc(item.company)}" data-timeline="${i}" data-field="company">
+              </div>
+            </div>
+            <div class="inline-row">
+              <div class="field">
+                <label>Insignia</label>
+                <input type="text" value="${esc(item.badge)}" data-timeline="${i}" data-field="badge">
+              </div>
+              <div class="field">
+                <label>Color</label>
+                <select data-timeline="${i}" data-field="badgeColor">
+                  <option value="accent" ${item.badgeColor === 'accent' ? 'selected' : ''}>Verde (accent)</option>
+                  <option value="incident" ${item.badgeColor === 'incident' ? 'selected' : ''}>Cian (incident)</option>
+                  <option value="muted" ${item.badgeColor === 'muted' ? 'selected' : ''}>Gris (muted)</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Rol</label>
+              <input type="text" value="${esc(item.role)}" data-timeline="${i}" data-field="role">
+            </div>
+            <div class="field">
+              <label>Descripción del rol</label>
+              <input type="text" value="${esc(item.roleDescription)}" data-timeline="${i}" data-field="roleDescription">
+            </div>
+            <div class="field">
+              <label>Descripción principal</label>
+              <textarea data-timeline="${i}" data-field="description" rows="3">${esc(item.description)}</textarea>
+            </div>
+            <div class="field">
+              <label>Logros</label>
+              <p class="hint">Formato: título | descripción (uno por línea)</p>
+              <textarea data-timeline="${i}" data-field="achievements" data-type="achievements" rows="4">${item.achievements.map(a => a.title + ' | ' + a.text).join('\n')}</textarea>
+            </div>
+            <div class="field">
+              <label>Etiqueta del stack</label>
+              <input type="text" value="${esc(item.stackLabel)}" data-timeline="${i}" data-field="stackLabel">
+            </div>
+            <div class="field">
+              <label>Tecnologías del stack</label>
+              <p class="hint">Una por línea</p>
+              <textarea data-timeline="${i}" data-field="stack" data-type="array" rows="4">${item.stack.join('\n')}</textarea>
+            </div>
+            <div class="field">
+              <label>Etiqueta inferior</label>
+              <input type="text" value="${esc(item.footerLabel)}" data-timeline="${i}" data-field="footerLabel">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function collectTimeline() {
+      document.querySelectorAll('[data-timeline]').forEach(el => {
+        const i = parseInt(el.dataset.timeline);
+        const field = el.dataset.field;
+        const type = el.dataset.type;
+        
+        if (type === 'achievements') {
+          content.timeline[i].achievements = el.value.split('\n').filter(v => v.trim()).map(line => {
+            const parts = line.split('|');
+            return { title: (parts[0] || '').trim(), text: (parts[1] || '').trim() };
+          });
+        } else if (type === 'array') {
+          content.timeline[i][field] = el.value.split('\n').filter(v => v.trim());
+        } else {
+          content.timeline[i][field] = el.value;
+        }
+      });
+    }
+
+    // ===== SKILLS RENDERER =====
+    function renderSkills() {
+      const container = document.getElementById('skills-container');
+      container.innerHTML = content.skills.columns.map((col, i) => `
+        <div class="array-group">
+          <div class="array-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+            <h4>Columna ${i + 1}: ${col.title}</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="array-body">
+            <div class="inline-row">
+              <div class="field">
+                <label>Título</label>
+                <input type="text" value="${esc(col.title)}" data-skill-col="${i}" data-field="title">
+              </div>
+              <div class="field">
+                <label>Subtítulo</label>
+                <input type="text" value="${esc(col.subtitle)}" data-skill-col="${i}" data-field="subtitle">
+              </div>
+            </div>
+            <div class="field">
+              <label>Elementos</label>
+              <p class="hint">Formato: título | descripción (uno por línea)</p>
+              <textarea data-skill-col="${i}" data-field="items" data-type="skill-items" rows="6">${col.items.map(it => it.title + ' | ' + it.description).join('\n')}</textarea>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function collectSkills() {
+      document.querySelectorAll('[data-skill-col]').forEach(el => {
+        const i = parseInt(el.dataset.skillCol);
+        const field = el.dataset.field;
+        const type = el.dataset.type;
+        
+        if (type === 'skill-items') {
+          content.skills.columns[i].items = el.value.split('\n').filter(v => v.trim()).map(line => {
+            const parts = line.split('|');
+            return { title: (parts[0] || '').trim(), description: (parts[1] || '').trim() };
+          });
+        } else {
+          content.skills.columns[i][field] = el.value;
+        }
+      });
+    }
+
+    // ===== CERTIFICATIONS RENDERER =====
+    function renderCertifications() {
+      const container = document.getElementById('certifications-container');
+      container.innerHTML = content.certifications.items.map((cert, i) => `
+        <div class="array-group">
+          <div class="array-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+            <h4>${i + 1}. ${cert.title}</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="array-body">
+            <div class="inline-row">
+              <div class="field">
+                <label>Etiqueta</label>
+                <input type="text" value="${esc(cert.label)}" data-cert="${i}" data-field="label">
+              </div>
+              <div class="field">
+                <label>Título</label>
+                <input type="text" value="${esc(cert.title)}" data-cert="${i}" data-field="title">
+              </div>
+            </div>
+            <div class="field">
+              <label>Institución / Descripción</label>
+              <input type="text" value="${esc(cert.institution)}" data-cert="${i}" data-field="institution">
+            </div>
+            <div class="inline-row">
+              <div class="field">
+                <label>Etiqueta inferior</label>
+                <input type="text" value="${esc(cert.footerLabel)}" data-cert="${i}" data-field="footerLabel">
+              </div>
+              <div class="field">
+                <label>Estado</label>
+                <input type="text" value="${esc(cert.status)}" data-cert="${i}" data-field="status">
+              </div>
+            </div>
+            <div class="field">
+              <label>Color de estado</label>
+              <select data-cert="${i}" data-field="statusColor">
+                <option value="accent" ${cert.statusColor === 'accent' ? 'selected' : ''}>Verde (accent)</option>
+                <option value="incident" ${cert.statusColor === 'incident' ? 'selected' : ''}>Cian (incident)</option>
+                <option value="neutral" ${cert.statusColor === 'neutral' ? 'selected' : ''}>Gris (neutral)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function collectCertifications() {
+      document.querySelectorAll('[data-cert]').forEach(el => {
+        const i = parseInt(el.dataset.cert);
+        const field = el.dataset.field;
+        content.certifications.items[i][field] = el.value;
+      });
+    }
+
+    // Escape HTML for safe rendering
+    function esc(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Initialize
+    loadContent();
+  </script>
+</body>
+</html>

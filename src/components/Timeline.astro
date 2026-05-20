@@ -1,0 +1,98 @@
+---
+import content from '../data/content.json';
+
+const { timeline } = content;
+
+const badgeColorMap = {
+  accent: 'text-brand-accent',
+  incident: 'text-brand-incident',
+  muted: 'text-neutral-500'
+};
+
+const dotColorMap = {
+  accent: 'bg-brand-accent',
+  incident: 'bg-neutral-800 group-hover:bg-brand-incident',
+  muted: 'bg-neutral-800'
+};
+
+const borderColorMap = {
+  accent: 'border-brand-accent',
+  incident: 'border-neutral-800 group-hover:border-brand-incident',
+  muted: 'border-neutral-800'
+};
+---
+
+<section id="experiencia" class="py-16 sm:py-20 lg:py-28 bg-neutral-950 border-b border-neutral-900">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabecera de sección -->
+    <div class="mb-10 sm:mb-14 lg:mb-20">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono text-brand-accent font-bold uppercase tracking-widest">[ CRONOLOGÍA DE IMPACTO ]</span>
+        <span class="w-8 h-[1px] bg-neutral-800"></span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-100 tracking-tight leading-none">
+        Evolución y Liderazgo Técnico
+      </h2>
+      <p class="text-neutral-400 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base leading-relaxed">
+        8 años de trayectoria en NTT DATA, desde el soporte técnico y la automatización hasta el liderazgo estratégico de equipos en operaciones críticas.
+      </p>
+    </div>
+
+    <!-- Eje cronológico -->
+    <div class="space-y-10 lg:space-y-14">
+      
+      {timeline.map((item, index) => (
+        <div class="relative group">
+          <div class="absolute left-0 top-0 bottom-0 w-px bg-neutral-900 hidden lg:block"></div>
+          
+          <div class="lg:pl-8 xl:pl-12">
+            <div class="flex items-center gap-3 mb-3">
+              <span class={`absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full hidden lg:block ${dotColorMap[item.badgeColor] || 'bg-neutral-800'} transition-colors`}></span>
+              <span class={`text-sm font-mono font-semibold ${badgeColorMap[item.badgeColor] || 'text-neutral-500'}`}>{item.period}</span>
+              <span class="text-xs font-mono text-neutral-600 uppercase">| {item.company}</span>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <span class={`text-xs font-mono tracking-widest uppercase font-bold ${badgeColorMap[item.badgeColor] || 'text-neutral-500'}`}>[ {item.badge} ]</span>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-neutral-100 mt-1">
+                  {item.role}
+                </h3>
+                <p class="text-sm text-neutral-400 italic font-mono mt-1">
+                  {item.roleDescription}
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+                <div class="lg:col-span-8 text-sm text-neutral-400 leading-relaxed space-y-3">
+                  <p>{item.description}</p>
+                  <ul class="space-y-2 list-disc list-inside text-neutral-300">
+                    {item.achievements.map((ach) => (
+                      <li><strong class="text-neutral-200">{ach.title}</strong> {ach.text}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="lg:col-span-4 bg-brand-surface border border-neutral-900 p-4 rounded flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest block mb-2">{item.stackLabel}</span>
+                    <div class="flex flex-wrap gap-1.5">
+                      {item.stack.map((tech) => (
+                        <span class="text-[10px] font-mono px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-400">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div class="mt-4 pt-4 border-t border-neutral-900 text-[10px] font-mono text-neutral-500">
+                    {item.footerLabel}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</section>

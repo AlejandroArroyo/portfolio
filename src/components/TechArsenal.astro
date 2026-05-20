@@ -1,0 +1,61 @@
+---
+import content from '../data/content.json';
+
+const { skills } = content;
+---
+
+<section id="habilidades" class="py-16 sm:py-20 lg:py-28 bg-brand-dark border-b border-neutral-900">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabecera de sección -->
+    <div class="mb-10 sm:mb-14 lg:mb-20">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono text-brand-accent font-bold uppercase tracking-widest">[ {skills.badge} ]</span>
+        <span class="w-8 h-[1px] bg-neutral-800"></span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-100 tracking-tight leading-none">
+        {skills.title}
+      </h2>
+      <p class="text-neutral-400 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base leading-relaxed">
+        {skills.description}
+      </p>
+    </div>
+
+    <!-- Columnas de competencias -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      
+      {skills.columns.map((col, i) => {
+        const icons = [
+          '<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />',
+          '<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />',
+          '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />'
+        ];
+        const colors = ['text-brand-accent', 'text-brand-incident', 'text-brand-accent'];
+        const borderColors = ['border-brand-accent/30', 'border-brand-incident/30', 'border-brand-accent/30'];
+        const bgColors = ['bg-brand-accent/5', 'bg-brand-incident/5', 'bg-brand-accent/5'];
+        return (
+          <div class={`bg-brand-surface border border-neutral-800 p-5 sm:p-6 lg:p-8 rounded hover:${borderColors[i]} transition-colors`}>
+            <div class="flex items-center gap-3 mb-6">
+              <div class={`w-8 h-8 rounded ${bgColors[i]} border ${colors[i].replace('text-', 'border-')}/20 flex items-center justify-center shrink-0`}>
+                <svg xmlns="http://www.w3.org/2000/svg" class={`w-4 h-4 ${colors[i]}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" set:html={icons[i]}></svg>
+              </div>
+              <h3 class="text-lg font-bold text-neutral-100 tracking-tight">{col.title}</h3>
+            </div>
+            
+            <p class="text-xs text-neutral-400 mb-6 font-mono uppercase tracking-wider">// {col.subtitle}</p>
+            
+            <ul class="space-y-4 text-sm text-neutral-300">
+              {col.items.map((item, j) => (
+                <li class={`${j < col.items.length - 1 ? 'border-b border-neutral-900 pb-3' : ''}`}>
+                  <strong class="text-neutral-200 block mb-1">{item.title}</strong>
+                  <span class="text-xs text-neutral-400">{item.description}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+
+    </div>
+  </div>
+</section>
