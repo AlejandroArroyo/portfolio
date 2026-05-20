@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f5f5f5"/>
+      <stop offset="100%" stop-color="#9ca3af"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#070708"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a1a1e" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="0" x2="0" y2="630"/>
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="700" y1="0" x2="700" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="1200" y1="0" x2="1200" y2="630"/>
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#accentGrad)"/>
+
+  <!-- Terminal box -->
+  <rect x="80" y="180" width="1040" height="270" rx="8" fill="#0d0d0f" stroke="#1a1a1e" stroke-width="1"/>
+
+  <!-- Terminal dots -->
+  <circle cx="110" cy="205" r="5" fill="#ef4444"/>
+  <circle cx="130" cy="205" r="5" fill="#f59e0b"/>
+  <circle cx="150" cy="205" r="5" fill="#10b981"/>
+
+  <!-- Terminal title -->
+  <text x="175" y="210" font-family="monospace" font-size="12" fill="#8e8e93" letter-spacing="2">PORTFOLIO // ALEJANDRO ARROYO GIL</text>
+
+  <!-- Status indicator -->
+  <circle cx="110" cy="250" r="4" fill="#10b981"/>
+  <text x="125" y="255" font-family="monospace" font-size="14" fill="#10b981" font-weight="bold" letter-spacing="3">ESTADO: NOMINAL</text>
+
+  <!-- Main text -->
+  <text x="110" y="310" font-family="sans-serif" font-size="36" fill="url(#textGrad)" font-weight="700">Resiliencia de Sistemas</text>
+  <text x="110" y="355" font-family="sans-serif" font-size="36" fill="url(#textGrad)" font-weight="700">y Operaciones Críticas</text>
+
+  <!-- Subtitle -->
+  <text x="110" y="410" font-family="monospace" font-size="16" fill="#8e8e93" letter-spacing="1">Cybersecurity Analyst | SOC | 8 Años en NTT DATA</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#accentGrad)"/>
+</svg>

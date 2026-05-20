@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 — Recurso no encontrado | Alejandro Arroyo Gil">
+  <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
+    <div class="max-w-lg w-full text-center">
+      <!-- Terminal box -->
+      <div class="bg-brand-surface border border-brand-border rounded-lg overflow-hidden">
+        <!-- Terminal chrome -->
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-brand-border">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          <span class="ml-2 text-[10px] font-mono text-neutral-500 tracking-widest uppercase">ERROR_404</span>
+        </div>
+
+        <!-- Terminal body -->
+        <div class="p-6 sm:p-8 font-mono text-left">
+          <p class="text-neutral-500 text-sm mb-2">$ curl /recurso-solicitado</p>
+          <p class="text-brand-alert text-sm mb-4">&gt; ERROR 404: Recurso no encontrado en el servidor.</p>
+          <p class="text-neutral-500 text-sm mb-2">$ ping alejandroarroyogil.com</p>
+          <p class="text-brand-accent text-sm mb-6">&gt; CONEXIÓN ACTIVA — El sitio responde correctamente.</p>
+          <p class="text-neutral-400 text-xs leading-relaxed">
+            La ruta solicitada no existe o ha sido movida. La infraestructura principal opera con normalidad.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/"
+          class="text-xs font-mono border border-neutral-800 px-5 py-2.5 rounded bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 text-neutral-300"
+        >
+          [ VOLVER AL INICIO ]
+        </a>
+        <a
+          href="#contacto"
+          class="text-xs font-mono text-neutral-500 hover:text-brand-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 px-3 py-2.5"
+        >
+          /contacto
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
