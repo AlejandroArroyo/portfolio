@@ -29,7 +29,7 @@
       },
       {
         "label": "/cv",
-        "href": "/cv-alejandro-arroyo-gil.pdf",
+        "href": "cv-alejandro-arroyo-gil.pdf",
         "download": true
       }
     ],
@@ -40,7 +40,7 @@
     "cvSection": {
       "prompt": "¿Quieres ver el detalle completo?",
       "buttonText": "Descargar CV en PDF",
-      "cvPath": "/cv-alejandro-arroyo-gil.pdf"
+      "cvPath": "cv-alejandro-arroyo-gil.pdf"
     }
   },
   "hero": {
