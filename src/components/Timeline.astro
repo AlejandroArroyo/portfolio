@@ -1,7 +1,10 @@
 ---
 import content from '../data/content.json';
 
-const { timeline } = content;
+const { timeline, header } = content;
+const cvPath = header.cvSection?.cvPath || '/cv-alejandro-arroyo-gil.pdf';
+const cvPrompt = header.cvSection?.prompt || '¿Quieres ver el detalle completo?';
+const cvButtonText = header.cvSection?.buttonText || 'Descargar CV en PDF';
 
 const badgeColorMap = {
   accent: 'text-brand-accent',
@@ -94,5 +97,21 @@ const borderColorMap = {
       ))}
 
     </div>
+
+    <!-- CTA Descargar CV -->
+    <div class="mt-14 sm:mt-20 pt-10 border-t border-neutral-900/60 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
+      <p class="text-sm text-neutral-400 font-mono tracking-wide">{cvPrompt}</p>
+      <a
+        href={cvPath}
+        download
+        class="inline-flex items-center gap-2 text-sm font-mono font-semibold text-brand-accent border border-brand-accent/40 px-5 py-2.5 rounded hover:bg-brand-accent/10 hover:border-brand-accent/60 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        {cvButtonText}
+      </a>
+    </div>
+
   </div>
 </section>

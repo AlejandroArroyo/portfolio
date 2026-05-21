@@ -36,7 +36,12 @@
     "statusLabel": "ESTADO",
     "statusValue": "disponible",
     "contactButtonText": "Contacto",
-    "cvLabel": "Descargar CV"
+    "cvLabel": "Descargar CV",
+    "cvSection": {
+      "prompt": "¿Quieres ver el detalle completo?",
+      "buttonText": "Descargar CV en PDF",
+      "cvPath": "/cv-alejandro-arroyo-gil.pdf"
+    }
   },
   "hero": {
     "badgeText": "SOC ACTIVO",
