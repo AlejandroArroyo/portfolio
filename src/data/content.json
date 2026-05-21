@@ -26,11 +26,17 @@
       {
         "label": "/contacto",
         "href": "#contacto"
+      },
+      {
+        "label": "/cv",
+        "href": "/cv-alejandro-arroyo-gil.pdf",
+        "download": true
       }
     ],
     "statusLabel": "ESTADO",
     "statusValue": "disponible",
-    "contactButtonText": "Contacto"
+    "contactButtonText": "Contacto",
+    "cvLabel": "Descargar CV"
   },
   "hero": {
     "badgeText": "SOC ACTIVO",
@@ -60,7 +66,7 @@
       "label": "CERTIFICACIONES",
       "value": "3",
       "suffix": "Creds",
-      "description": "CCNA, CyberOps Associate, Fortinet FCP Analyst"
+      "description": "CCNA, CyberOps Associate y Fortinet FCP Analyst"
     },
     {
       "label": "PROYECTOS CRÍTICOS",
@@ -215,7 +221,7 @@
   },
   "socBridge": {
     "badge": "VENTAJA COMPETITIVA",
-    "title": "Del IT al SOC: Mi Propuesta de Valor",
+    "title": "De IT al SOC: Mi Propuesta de Valor",
     "description": "Lo que me diferencia de otros candidatos junior no es solo lo que sé, sino de dónde vengo. Cada competencia adquirida en 8 años de IT tiene una aplicación directa y potente en operaciones de seguridad.",
     "items": [
       {
@@ -234,7 +240,9 @@
         "strength": "Coordinación internacional (Argentina-España)",
         "application": "Traspaso de Turnos (Handover): Comunicación fluida y sin fricciones en entornos SOC que operan bajo criticidad técnica 24/7."
       }
-    ]
+    ],
+    "columnStrength": "Fortaleza real (IT / Negocio)",
+    "columnApplication": "Aplicación directa en entornos soc"
   },
   "certifications": {
     "badge": "CREDENCIALES DE SEGURIDAD",
@@ -242,11 +250,11 @@
     "description": "Formación que combina un máster especializado con certificaciones internacionales líderes en redes, ciberdefensa y análisis de seguridad.",
     "items": [
       {
-        "label": "MÁSTER UNIVERSITARIO",
+        "label": "MÁSTER",
         "title": "Ciberseguridad e Inteligencia Artificial",
-        "institution": "Tajamar Centro Universitario — En curso / Finalización 2026",
+        "institution": "Tajamar Professional Education  2025-2026",
         "footerLabel": "ESPECIALIZACIÓN ACADÉMICA",
-        "status": "EN CURSO",
+        "status": "COMPLETADO",
         "statusColor": "accent"
       },
       {
@@ -302,9 +310,9 @@
   },
   "footer": {
     "brand": "PORTFOLIO DE OPERACIONES SOC",
-    "copyright": "© 2026. Diseñado con rigor técnico, sin código innecesario y máxima accesibilidad semántica.",
+    "copyright": "© 2026. Desarrollado bajo principios de optimización de recursos, código limpio y arquitectura segura.",
     "tech": [
-      "ASTRO v4.15",
+      "ASTRO v4.16",
       "TAILWIND CSS",
       "SESIÓN SEGURA"
     ]

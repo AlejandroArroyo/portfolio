@@ -20,7 +20,16 @@ const { header } = content;
     <!-- Navegación desktop -->
     <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs font-mono tracking-widest uppercase">
       {header.navLinks.map((link) => (
-        <a href={link.href} class="text-neutral-400 hover:text-neutral-100 transition-colors py-1 focus:outline-none">{link.label}</a>
+        link.download ? (
+          <a href={link.href} download class="text-neutral-400 hover:text-brand-accent transition-colors py-1 focus:outline-none inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            {link.label}
+          </a>
+        ) : (
+          <a href={link.href} class="text-neutral-400 hover:text-neutral-100 transition-colors py-1 focus:outline-none">{link.label}</a>
+        )
       ))}
     </nav>
 
@@ -65,12 +74,25 @@ const { header } = content;
   <div id="mobile-menu" class="xl:hidden hidden border-t border-neutral-900/80 bg-brand-dark/95 backdrop-blur-md">
     <nav class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-1">
       {header.navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="mobile-nav-link text-sm font-mono tracking-widest uppercase text-neutral-400 hover:text-neutral-100 hover:bg-neutral-900/50 rounded px-3 py-2.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
-        >
-          {link.label}
-        </a>
+        link.download ? (
+          <a
+            href={link.href}
+            download
+            class="mobile-nav-link text-sm font-mono tracking-widest uppercase text-brand-accent hover:text-brand-accent/80 hover:bg-neutral-900/50 rounded px-3 py-2.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 inline-flex items-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            {link.label}
+          </a>
+        ) : (
+          <a
+            href={link.href}
+            class="mobile-nav-link text-sm font-mono tracking-widest uppercase text-neutral-400 hover:text-neutral-100 hover:bg-neutral-900/50 rounded px-3 py-2.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+          >
+            {link.label}
+          </a>
+        )
       ))}
     </nav>
   </div>

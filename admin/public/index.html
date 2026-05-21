@@ -145,11 +145,15 @@
         <label>Texto botón de contacto</label>
         <input type="text" data-path="header.contactButtonText">
       </div>
+      <div class="field">
+        <label>Texto botón CV</label>
+        <input type="text" data-path="header.cvLabel">
+      </div>
       
       <div class="field">
         <label>Enlaces de navegación</label>
-        <p class="hint">Formato: etiqueta|destino, uno por línea</p>
-        <textarea data-path="header.navLinks" data-type="nav-links" rows="6"></textarea>
+        <p class="hint">Formato: etiqueta|destino, uno por línea. Para enlaces de descarga añadir <code>|download</code> al final. Ej: <code>/cv|/cv.pdf|download</code></p>
+        <textarea data-path="header.navLinks" data-type="nav-links" rows="8"></textarea>
       </div>
     </div>
 
@@ -503,7 +507,7 @@
         if (type === 'array' && Array.isArray(value)) {
           el.value = value.join('\n');
         } else if (type === 'nav-links' && Array.isArray(value)) {
-          el.value = value.map(l => l.label + '|' + l.href).join('\n');
+          el.value = value.map(l => l.label + '|' + l.href + (l.download ? '|download' : '')).join('\n');
         } else if (typeof value === 'string') {
           el.value = value;
         }
@@ -528,7 +532,11 @@
         } else if (type === 'nav-links') {
           setByPath(content, path, el.value.split('\n').filter(v => v.trim()).map(line => {
             const parts = line.split('|');
-            return { label: parts[0]?.trim() || '', href: parts[1]?.trim() || '' };
+            const entry = { label: parts[0]?.trim() || '', href: parts[1]?.trim() || '' };
+            if (parts[2]?.trim().toLowerCase() === 'download') {
+              entry.download = true;
+            }
+            return entry;
           }));
         } else {
           setByPath(content, path, el.value);
