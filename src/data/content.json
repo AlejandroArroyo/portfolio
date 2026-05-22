@@ -20,6 +20,10 @@
         "href": "#soc-bridge"
       },
       {
+        "label": "/proyectos",
+        "href": "#proyectos"
+      },
+      {
         "label": "/formación",
         "href": "#certificaciones"
       },
@@ -226,7 +230,7 @@
   },
   "socBridge": {
     "badge": "VENTAJA COMPETITIVA",
-    "title": "De IT al SOC: Mi Propuesta de Valor",
+    "title": "De IT a SOC: Mi Propuesta de Valor",
     "description": "Lo que me diferencia de otros candidatos junior no es solo lo que sé, sino de dónde vengo. Cada competencia adquirida en 8 años de IT tiene una aplicación directa y potente en operaciones de seguridad.",
     "items": [
       {
@@ -248,6 +252,19 @@
     ],
     "columnStrength": "Fortaleza real (IT / Negocio)",
     "columnApplication": "Aplicación directa en entornos soc"
+  },
+  "projects": {
+    "badge": "LABORATORIOS Y PROYECTOS",
+    "title": "Proyectos y Laboratorios de Seguridad",
+    "description": "Proyectos hands-on que reflejan mi enfoque práctico en ciberseguridad: desde honeypots hasta automatización de defensa.",
+    "items": [
+      {
+        "title": "Honeylab",
+        "description": "Laboratorio de honeypots para detección y análisis de tráfico malicioso en redes controladas. Despliegue automatizado con scripts de monitoreo y captura de logs.",
+        "url": "https://github.com/AlejandroArroyo/honeylab",
+        "tags": ["Honeypot", "Security Monitoring", "Python"]
+      }
+    ]
   },
   "certifications": {
     "badge": "CREDENCIALES DE SEGURIDAD",

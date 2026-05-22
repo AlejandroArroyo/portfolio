@@ -1,0 +1,62 @@
+---
+import content from '../data/content.json';
+
+const { projects } = content;
+---
+
+<section id="proyectos" class="py-16 sm:py-20 lg:py-28 bg-brand-dark border-b border-neutral-900">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Cabecera -->
+    <div class="mb-10 sm:mb-14">
+      <span class="inline-block font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-accent border border-brand-accent/30 px-3 py-1 rounded-full mb-4">
+        {projects.badge}
+      </span>
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-100 mb-3">{projects.title}</h2>
+      <p class="text-sm sm:text-base text-neutral-400 max-w-3xl leading-relaxed">{projects.description}</p>
+    </div>
+
+    <!-- Grid de proyectos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      {projects.items.map((item) => (
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block bg-brand-surface border border-brand-border rounded-lg p-5 sm:p-6 hover:border-brand-accent/40 hover:bg-neutral-900/50 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+        >
+          <!-- Icono repositorio -->
+          <div class="w-10 h-10 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center mb-4 group-hover:border-brand-accent/30 transition-colors">
+            <svg class="w-5 h-5 text-neutral-400 group-hover:text-brand-accent transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </div>
+
+          <!-- Título -->
+          <h3 class="text-base sm:text-lg font-bold text-neutral-200 group-hover:text-brand-accent transition-colors mb-2">{item.title}</h3>
+
+          <!-- Descripción -->
+          <p class="text-sm text-neutral-400 leading-relaxed mb-4 line-clamp-3">{item.description}</p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-1.5">
+            {item.tags.map((tag) => (
+              <span class="text-[10px] font-mono px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-500 group-hover:border-neutral-700 transition-colors">{tag}</span>
+            ))}
+          </div>
+
+          <!-- Flecha indicadora -->
+          <div class="mt-4 pt-3 border-t border-neutral-800/50 flex items-center justify-between">
+            <span class="text-[10px] font-mono text-neutral-600 uppercase tracking-wider">Abrir repositorio</span>
+            <svg class="w-3.5 h-3.5 text-neutral-600 group-hover:text-brand-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

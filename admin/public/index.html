@@ -108,6 +108,7 @@
     <button class="nav-item" data-section="timeline">Cronología</button>
     <button class="nav-item" data-section="skills">Competencias</button>
     <button class="nav-item" data-section="socBridge">Ventaja SOC</button>
+    <button class="nav-item" data-section="projects">Proyectos</button>
     <button class="nav-item" data-section="certifications">Certificaciones</button>
     <button class="nav-item" data-section="contact">Contacto</button>
     <button class="nav-item" data-section="footer">Pie de Página</button>
@@ -300,6 +301,29 @@
       </div>
       
       <div id="socBridge-container"></div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="section-projects" class="section">
+      <h1 class="section-title">Proyectos y Laboratorios</h1>
+      <p class="section-desc">Tarjetas de proyectos de GitHub con enlace directo a los repositorios.</p>
+      
+      <div class="inline-row">
+        <div class="field">
+          <label>Insignia</label>
+          <input type="text" data-path="projects.badge">
+        </div>
+        <div class="field">
+          <label>Título</label>
+          <input type="text" data-path="projects.title">
+        </div>
+      </div>
+      <div class="field">
+        <label>Descripción</label>
+        <textarea data-path="projects.description" rows="3"></textarea>
+      </div>
+      
+      <div id="projects-container"></div>
     </div>
 
     <!-- CERTIFICATIONS -->
@@ -532,6 +556,7 @@
       renderTimeline();
       renderSkills();
       renderSocBridge();
+      renderProjects();
       renderCertifications();
     }
 
@@ -561,6 +586,7 @@
       collectTimeline();
       collectSkills();
       collectSocBridge();
+      collectProjects();
       collectCertifications();
     }
 
@@ -785,6 +811,53 @@
         const i = parseInt(el.dataset.soc);
         const field = el.dataset.field;
         content.socBridge.items[i][field] = el.value;
+      });
+    }
+
+    // ===== PROJECTS RENDERER =====
+    function renderProjects() {
+      const container = document.getElementById('projects-container');
+      container.innerHTML = content.projects.items.length === 0
+        ? '<p class="text-sm text-neutral-500 font-mono">No hay proyectos. Añade el primero desde el JSON.</p>'
+        : content.projects.items.map((item, i) => `
+        <div class="array-group">
+          <div class="array-header" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+            <h4>${i + 1}. ${item.title}</h4>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="array-body">
+            <div class="field">
+              <label>Título del proyecto</label>
+              <input type="text" value="${esc(item.title)}" data-project="${i}" data-field="title">
+            </div>
+            <div class="field">
+              <label>Descripción</label>
+              <textarea data-project="${i}" data-field="description" rows="3">${esc(item.description)}</textarea>
+            </div>
+            <div class="field">
+              <label>URL del repositorio</label>
+              <input type="text" value="${esc(item.url)}" data-project="${i}" data-field="url">
+            </div>
+            <div class="field">
+              <label>Tags</label>
+              <p class="hint">Uno por línea</p>
+              <textarea data-project="${i}" data-field="tags" data-type="array" rows="3">${item.tags.join('\n')}</textarea>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function collectProjects() {
+      document.querySelectorAll('[data-project]').forEach(el => {
+        const i = parseInt(el.dataset.project);
+        const field = el.dataset.field;
+        const type = el.dataset.type;
+        if (type === 'array') {
+          content.projects.items[i][field] = el.value.split('\n').filter(v => v.trim());
+        } else {
+          content.projects.items[i][field] = el.value;
+        }
       });
     }
 
