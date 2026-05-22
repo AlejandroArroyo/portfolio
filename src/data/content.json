@@ -263,6 +263,12 @@
         "description": "Laboratorio de honeypots para detección y análisis de tráfico malicioso en redes controladas. Despliegue automatizado con scripts de monitoreo y captura de logs.",
         "url": "https://github.com/AlejandroArroyo/honeylab",
         "tags": ["Honeypot", "Security Monitoring", "Python"]
+      },
+      {
+        "title": "Sqli-lab",
+        "description": "Entorno interactivo para el análisis ofensivo y defensivo de vulnerabilidades SQLi. Implementa un sistema dual en Flask para validar código seguro, aplicar 'Prepared Statements' y asentar principios de DevSecOps bajo contenedores",
+        "url": "https://github.com/AlejandroArroyo/sqli-lab",
+        "tags": ["SQL Injection", "DevSecOps", "Docker"]
       }
     ]
   },
