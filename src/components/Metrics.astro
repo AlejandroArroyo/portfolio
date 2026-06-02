@@ -4,18 +4,21 @@ import content from '../data/content.json';
 const { metrics } = content;
 ---
 
-<section class="border-b border-neutral-900 bg-neutral-950">
+<section class="border-b border-neutral-900 bg-neutral-950/95 relative overflow-hidden">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-700/70 to-transparent"></div>
   <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 lg:gap-12 divide-y md:divide-y-0 md:divide-x divide-neutral-900">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
       
       {metrics.map((metric, i) => (
-        <div class={`${i > 0 ? 'pt-8 md:pt-0 md:pl-8' : 'pt-6 md:pt-0 md:pl-0'} flex flex-col justify-between`}>
-          <span class="text-xs font-mono text-brand-accent tracking-wider uppercase mb-2">// {metric.label}</span>
+        <div class="group relative min-h-44 overflow-hidden rounded border border-neutral-900 bg-brand-surface/70 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/35 hover:bg-brand-surface">
+          <div class={`absolute inset-x-0 top-0 h-px ${i === 1 ? 'bg-brand-incident/70' : 'bg-brand-accent/70'} opacity-70`}></div>
+          <div class="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-brand-accent/5 blur-2xl transition-opacity group-hover:opacity-100"></div>
+          <span class={`text-xs font-mono ${i === 1 ? 'text-brand-incident' : 'text-brand-accent'} tracking-wider uppercase mb-4 block`}>// {metric.label}</span>
           <div class="flex items-baseline gap-1">
             <span class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-100 tracking-tight leading-none" set:html={metric.value}></span>
             {metric.suffix && <span class="text-neutral-500 font-mono text-base lg:text-lg">{metric.suffix}</span>}
           </div>
-          <p class="text-sm text-neutral-400 mt-3 leading-relaxed">{metric.description}</p>
+          <p class="text-sm text-neutral-400 mt-4 leading-relaxed">{metric.description}</p>
         </div>
       ))}
 

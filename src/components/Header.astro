@@ -4,38 +4,40 @@ import content from '../data/content.json';
 const { header } = content;
 ---
 
-<header id="site-header" class="sticky top-0 z-50 w-full bg-brand-dark/80 backdrop-blur-md border-b border-neutral-900/80 transition-all duration-300">
-  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+<header id="site-header" class="sticky top-0 z-50 w-full bg-brand-dark/85 backdrop-blur-xl border-b border-neutral-900/80 transition-all duration-300">
+  <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-accent/45 to-transparent"></div>
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
     <!-- Logo/Iniciales -->
-    <a href="#top" class="group flex items-center gap-3 focus:outline-none shrink-0">
-      <div class="w-7 h-7 bg-neutral-900 border border-neutral-800 rounded flex items-center justify-center group-hover:border-brand-accent transition-colors">
-        <span class="text-xs font-mono font-bold text-brand-accent group-hover:text-brand-accent/90 transition-colors">&gt;_</span>
+    <a href="#top" class="group flex items-center gap-3 sm:gap-4 focus:outline-none shrink-0">
+      <div class="relative w-10 h-10 sm:w-12 sm:h-12 bg-neutral-950 border border-neutral-800 rounded flex items-center justify-center group-hover:border-brand-accent/70 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.18)] transition-all duration-300">
+        <span class="absolute inset-1 rounded border border-brand-accent/10 group-hover:border-brand-accent/25 transition-colors"></span>
+        <span class="text-sm sm:text-base font-mono font-bold text-brand-accent group-hover:text-brand-accent/90 transition-colors">&gt;_</span>
       </div>
-      <div class="flex flex-col">
-        <span class="text-xs font-mono font-semibold tracking-wider text-neutral-200">{header.brand}</span>
-        <span class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest leading-none hidden sm:block">{header.brandSubtitle}</span>
+      <div class="flex flex-col min-w-0">
+        <span class="text-sm sm:text-base lg:text-lg font-mono font-extrabold tracking-[0.16em] text-neutral-100 leading-tight group-hover:text-white transition-colors">{header.brand}</span>
+        <span class="text-[10px] sm:text-[11px] font-mono text-neutral-500 uppercase tracking-[0.22em] leading-none hidden sm:block mt-1">{header.brandSubtitle}</span>
       </div>
     </a>
 
     <!-- Navegación desktop -->
-    <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs font-mono tracking-widest uppercase">
+    <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 xl:ml-12 2xl:ml-16 text-xs font-mono tracking-widest uppercase">
       {header.navLinks.map((link) => (
         link.download ? (
-          <a href={link.href} download class="text-neutral-400 hover:text-brand-accent transition-colors py-1 focus:outline-none inline-flex items-center gap-1.5">
+          <a href={link.href} download class="relative text-neutral-400 hover:text-brand-accent transition-colors py-2 focus:outline-none inline-flex items-center gap-1.5 after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-brand-accent after:transition-transform hover:after:scale-x-100">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>
             {link.label}
           </a>
         ) : (
-          <a href={link.href} class="text-neutral-400 hover:text-neutral-100 transition-colors py-1 focus:outline-none">{link.label}</a>
+          <a href={link.href} class="relative text-neutral-400 hover:text-neutral-100 transition-colors py-2 focus:outline-none after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-neutral-300 after:transition-transform hover:after:scale-x-100">{link.label}</a>
         )
       ))}
     </nav>
 
     <!-- Indicador de Estado -->
-    <div class="flex items-center gap-3">
-      <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-brand-surface border border-neutral-800 rounded-full">
+    <div class="flex items-center gap-5 xl:gap-7 xl:ml-12 2xl:ml-16">
+      <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-brand-surface/90 border border-neutral-800 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
@@ -44,19 +46,12 @@ const { header } = content;
           {header.statusLabel}: <span class="text-brand-accent">{header.statusValue}</span>
         </span>
       </div>
-      
-      <a 
-        href="#contacto" 
-        class="text-xs font-mono border border-neutral-800 px-3 py-1.5 rounded bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-all focus:outline-none text-neutral-300 shrink-0"
-      >
-        {header.contactButtonText}
-      </a>
 
       <!-- Hamburger button (mobile/tablet) -->
       <button
         id="menu-toggle"
         type="button"
-        class="xl:hidden flex items-center justify-center w-9 h-9 rounded border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+        class="xl:hidden flex items-center justify-center w-10 h-10 rounded border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
         aria-label="Abrir menú de navegación"
         aria-expanded="false"
       >
