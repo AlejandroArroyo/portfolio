@@ -1,4 +1,4 @@
-{
+y Ope{
   "header": {
     "brand": "ALEJANDRO ARROYO GIL",
     "brandSubtitle": "Analista de Ciberseguridad & Ex-Dev | SOC",
@@ -75,7 +75,7 @@
       "label": "CERTIFICACIONES",
       "value": "3",
       "suffix": "Creds",
-      "description": "CCNA, CyberOps Associate y Fortinet FCP Analyst"
+      "description": "CCNA, CyberOps Associate y Fortinet FCP Security Operations"
     },
     {
       "label": "PROYECTOS CRÍTICOS",
@@ -213,7 +213,7 @@
             "description": "Routing, switching, análisis de tráfico, operaciones SOC y respuesta estructurada ante incidentes."
           },
           {
-            "title": "Fortinet FCP Analyst",
+            "title": "Fortinet FCP Security Operations",
             "description": "Seguridad perimetral, gestión de firewalls corporativos y análisis avanzado de logs de amenazas."
           },
           {
@@ -303,7 +303,7 @@
       },
       {
         "label": "CARRERA DE SEGURIDAD FORTINET",
-        "title": "Fortinet Certified Professional (FCP - Analyst)",
+        "title": "Fortinet Certified Professional (FCP - Security Operations)",
         "institution": "Seguridad Perimetral, Firewalls y Análisis de Logs",
         "footerLabel": "CREDENCIAL DE ANALISTA",
         "status": "ACTIVA",
